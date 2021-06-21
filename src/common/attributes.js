@@ -1,0 +1,5 @@
+const ATTRIBUTES = {
+  CONTRACT_GET_ONE: 'CONTRACT_GET_ONE',
+};
+
+module.exports = ATTRIBUTES;
