@@ -30,14 +30,14 @@ app.get('/contracts/:id',
   contractController.getItem)
 
 /**
- * @returns contracts for the authz user
+ * @returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
  */
 app.get('/contracts',
   isGrantedMiddleware(ATTRIBUTES.CONTRACT_GET_ALL),
   contractController.getAll)
 
 /**
- * @returns unpaid jobs for a user
+ * @returns all unpaid jobs for a user (either a client or contractor), for active contracts only.
  */
 app.get('/jobs/unpaid',
   isGrantedMiddleware(ATTRIBUTES.JOB_UNPAID),
@@ -58,14 +58,14 @@ app.post('/balances/deposit/:userId',
   clientController.makeADeposit)
 
 /**
- * @returns the most profitable profession
+ * @returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
  */
 app.get('/admin/best-profession',
   isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_PROFESSION),
   adminController.getBestProfession)
 
 /**
- * @returns unpaid jobs for a user
+ * @returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2
  */
 app.get('/admin/best-clients',
   isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_CLIENTS),
