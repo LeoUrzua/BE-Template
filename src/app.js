@@ -7,6 +7,7 @@ const {getProfile} = require('./middleware/getProfile')
 const voters = require('./common/voters');
 const ATTRIBUTES = require('./common/attributes');
 const contractController = require('./controllers/contracts')
+const jobController = require('./controllers/jobs')
 const app = express();
 app.use(bodyParser.json());
 app.set('sequelize', sequelize)
@@ -32,5 +33,12 @@ app.get('/contracts/:id',
 app.get('/contracts',
   isGrantedMiddleware(ATTRIBUTES.CONTRACT_GET_ALL),
   contractController.getAll)
+
+/**
+ * @returns unpaid jobs for a user
+ */
+app.get('/jobs/unpaid',
+  isGrantedMiddleware(ATTRIBUTES.JOB_UNPAID),
+  jobController.getUpaid)
 
 module.exports = app;

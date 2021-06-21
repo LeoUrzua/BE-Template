@@ -1,7 +1,8 @@
 const ATTRIBUTES = require('../attributes');
 
 const supportedAttributes = [
-  ATTRIBUTES.CONTRACT_GET_ALL
+  ATTRIBUTES.CONTRACT_GET_ALL,
+  ATTRIBUTES.JOB_UNPAID,
 ];
 
 const contractOwnVoter = () => {
@@ -10,9 +11,6 @@ const contractOwnVoter = () => {
   }
 
   const voteOnAttribute = async (attribute, subject, user, context) => {
-    console.log(`u: `, user)
-    console.log(`u: `, user !== null)
-
     return user !== null
   };
 

@@ -8,7 +8,6 @@ const contractService = {
   },
 
   async getAll(userId){
-    console.log(`userAAA: `, userId)
     const contracts = await Contract.findAll({
       where: {
         [Op.or]: [
