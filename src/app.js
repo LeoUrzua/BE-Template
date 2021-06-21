@@ -25,4 +25,12 @@ app.use(
 app.get('/contracts/:id',
   isGrantedMiddleware(ATTRIBUTES.CONTRACT_GET_ONE),
   contractController.getItem)
+
+/**
+ * @returns contracts for the authz user
+ */
+app.get('/contracts',
+  isGrantedMiddleware(ATTRIBUTES.CONTRACT_GET_ALL),
+  contractController.getAll)
+
 module.exports = app;

@@ -13,6 +13,20 @@ const controller = {
       next(500);
     }
   },
+
+  async getAll(req, res , next) {
+    const {id: userId} = req.user;
+    try {
+      const contracts = await contractService.getAll(userId)
+      if(!contracts) return res.status(404).end()
+      res.status(200).json(contracts);
+      next();
+    } catch (err) {
+      console.log(err)
+      res.status(500).end();
+      next(500);
+    }
+  },
 }
 
 module.exports = controller;

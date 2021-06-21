@@ -1,7 +1,11 @@
 const getProfile = async (req, res, next) => {
   const {Profile} = req.app.get('models')
-  const profile = await Profile.findOne({where: {id: req.get('profile_id')}})
+  const profileId = req.get('profile_id')
+  if(!profileId) return null
+  console.log(`profileID: `, profileId)
+  const profile = await Profile.findOne({where: {id: req.get('profile_id')}, raw: true})
   if(!profile) return null
+  req.user = profile
   return profile
 }
 
