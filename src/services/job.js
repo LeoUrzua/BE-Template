@@ -72,6 +72,26 @@ const contractService = {
        )
     });
   },
+
+  async getSumOfPendingJobsByClient(userId){
+    const totalToPay = await Job.sum('price', {
+      where: {
+        paid: { [Op.not]: true },
+        '$Contract.ClientId$': userId,
+      },
+      include: [{
+        model: Contract,
+        required: true,
+        where: {
+          status: 'in_progress',
+          [Op.or]: [{ ClientId: userId }, { ContractorId: userId }],
+        },
+      }],
+      raw: true
+    });
+
+    return totalToPay || 0
+  }
 }
 
 module.exports = contractService

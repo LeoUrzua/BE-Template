@@ -8,6 +8,7 @@ const voters = require('./common/voters');
 const ATTRIBUTES = require('./common/attributes');
 const contractController = require('./controllers/contracts')
 const jobController = require('./controllers/jobs')
+const clientController = require('./controllers/client')
 const app = express();
 app.use(bodyParser.json());
 app.set('sequelize', sequelize)
@@ -42,10 +43,17 @@ app.get('/jobs/unpaid',
   jobController.getUnpaid)
 
 /**
- * @returns pay for a job
+ * @returns null
  */
 app.post('/jobs/:job_id/pay',
   isGrantedMiddleware(ATTRIBUTES.JOB_PAY),
   jobController.payJob)
+
+/**
+ * @returns 204 if the resource was updated successfully
+ */
+app.post('/balances/deposit/:userId',
+  isGrantedMiddleware(ATTRIBUTES.CLIENT_DEPOSIT),
+  clientController.makeADeposit)
 
 module.exports = app;

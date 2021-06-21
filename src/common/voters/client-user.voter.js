@@ -2,6 +2,7 @@ const ATTRIBUTES = require('../attributes');
 
 const supportedAttributes = [
   ATTRIBUTES.JOB_PAY,
+  ATTRIBUTES.CLIENT_DEPOSIT,
 ];
 
 const clientUserVoter = () => {
