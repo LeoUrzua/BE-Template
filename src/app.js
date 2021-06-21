@@ -41,4 +41,11 @@ app.get('/jobs/unpaid',
   isGrantedMiddleware(ATTRIBUTES.JOB_UNPAID),
   jobController.getUnpaid)
 
+/**
+ * @returns pay for a job
+ */
+app.post('/jobs/:job_id/pay',
+  isGrantedMiddleware(ATTRIBUTES.JOB_PAY),
+  jobController.payJob)
+
 module.exports = app;
