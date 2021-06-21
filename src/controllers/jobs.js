@@ -1,10 +1,10 @@
 const jobService = require('../services/job');
 
 const controller = {
-  async getUpaid(req, res , next) {
+  async getUnpaid(req, res , next) {
     const {id: userId} = req.user;
     try {
-      const unpaidJobs = await jobService.getUpaid(userId)
+      const unpaidJobs = await jobService.getUnpaid(userId)
       if(!unpaidJobs) return res.status(404).end()
       res.status(200).json(unpaidJobs);
       next();

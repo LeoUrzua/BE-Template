@@ -2,7 +2,7 @@ const { Op } = require("sequelize");
 const { Job, Contract } = require('../model')
 
 const contractService = {
-  async getUpaid(userId){
+  async getUnpaid(userId){
     const jobs = await Job.findAll({
       where: {
         paid: { [Op.not]: true },

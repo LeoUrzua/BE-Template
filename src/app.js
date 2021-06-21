@@ -39,6 +39,6 @@ app.get('/contracts',
  */
 app.get('/jobs/unpaid',
   isGrantedMiddleware(ATTRIBUTES.JOB_UNPAID),
-  jobController.getUpaid)
+  jobController.getUnpaid)
 
 module.exports = app;
