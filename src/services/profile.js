@@ -26,6 +26,22 @@ const profileService = {
     `, { type: QueryTypes.SELECT });
 
     return bestProfession
+  },
+
+  async getBestClient(startDate, endDate, limit){
+
+    limit = limit || 2
+
+    const bestClients = await sequelize.query(`
+         SELECT p.id 'id', (p.firstName || ' ' || p.lastName) as 'name', j.price 'earnings' FROM Profiles p, Contracts c
+        LEFT JOIN Jobs j ON c.id = j.ContractId
+        WHERE p.id = c.ClientId AND j.paid = 1 AND j.paymentDate BETWEEN '${startDate}' AND '${endDate}'
+        GROUP BY p.id
+        ORDER BY max(j.price) DESC
+        LIMIT ${limit}
+    `, { type: QueryTypes.SELECT });
+
+    return bestClients
   }
 }
 

@@ -58,10 +58,18 @@ app.post('/balances/deposit/:userId',
   clientController.makeADeposit)
 
 /**
- * @returns unpaid jobs for a user
+ * @returns the most profitable profession
  */
 app.get('/admin/best-profession',
-  // isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_PROFESSION),
+  isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_PROFESSION),
   adminController.getBestProfession)
+
+/**
+ * @returns unpaid jobs for a user
+ */
+app.get('/admin/best-clients',
+  isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_CLIENTS),
+  adminController.getBestClient)
+
 
 module.exports = app;
