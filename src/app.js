@@ -9,6 +9,7 @@ const ATTRIBUTES = require('./common/attributes');
 const contractController = require('./controllers/contracts')
 const jobController = require('./controllers/jobs')
 const clientController = require('./controllers/client')
+const adminController = require('./controllers/admin')
 const app = express();
 app.use(bodyParser.json());
 app.set('sequelize', sequelize)
@@ -55,5 +56,12 @@ app.post('/jobs/:job_id/pay',
 app.post('/balances/deposit/:userId',
   isGrantedMiddleware(ATTRIBUTES.CLIENT_DEPOSIT),
   clientController.makeADeposit)
+
+/**
+ * @returns unpaid jobs for a user
+ */
+app.get('/admin/best-profession',
+  // isGrantedMiddleware(ATTRIBUTES.PROFILE_BEST_PROFESSION),
+  adminController.getBestProfession)
 
 module.exports = app;
