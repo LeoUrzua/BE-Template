@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@wizeline/access-decision-manager-express": "^0.5.2",
     "body-parser": "^1.19.0",
     "express": "4.17.1",
     "sequelize": "^6.3.4",
