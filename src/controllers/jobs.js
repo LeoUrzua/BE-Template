@@ -27,10 +27,8 @@ const controller = {
         return res.status(409).end();
       const contractorId = job.Contract.ContractorId
       const contractId = job.Contract.id
-      //TODO: fix this, it's returning 404 even when this call is being completed successfully
       await jobService.payJob(job, userId, contractorId, contractId)
-      res.status(204);
-      next();
+      res.status(204).end();
     } catch (err) {
       console.log(err)
       res.status(500).end();

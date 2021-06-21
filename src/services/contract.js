@@ -3,8 +3,8 @@ const { Contract } = require('../model')
 
 const contractService = {
   async getItem(id){
-    const contract = await Contract.findOne({where: {id}, raw: true})
-    return contract
+    const contract = await Contract.findOne({where: {id}})
+    return contract.toJSON()
   },
 
   async getAll(userId){

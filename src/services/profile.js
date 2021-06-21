@@ -1,19 +1,14 @@
 const { Profile } = require('../model')
 
-const contractService = {
+const profileService = {
   async getItem(id){
-    const profile = await Profile.findOne({where: {id}, raw: true})
+    const profile = await Profile.findOne({where: {id}})
     return profile
   },
-  async makeADeposit(profileId, amount){
-    const [a, b] = await Profile.increment('balance', {
-      returning: true,
-      by: amount,
-      where: { id: profileId },
-    })
-    //TODO: check why this is returning [ undefined, 1 ] undefined
-    console.log(a, b)
+  async makeADeposit(client ,amount){
+    client.balance += amount;
+    await client.save();
   },
 }
 
-module.exports = contractService
+module.exports = profileService
