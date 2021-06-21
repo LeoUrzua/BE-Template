@@ -1,4 +1,5 @@
-const ATTRIBUTES = require('../attributes')
+const ATTRIBUTES = require('../attributes');
+const contractService = require('../../services/contract');
 
 const supportedAttributes = [
   ATTRIBUTES.CONTRACT_GET_ONE
@@ -11,13 +12,9 @@ const contractOwnVoter = () => {
 
   const voteOnAttribute = async (attribute, subject, user, context) => {
     const {id} = context.req.params;
-    //TODO: Create a service and get the contract from the contract service
-    const contract = {
-      ContractorId: id,
-      ClientId: id
-    };
+    const contract = await contractService.getItem(id)
     if(user === null) return false
-    return contract.ContractorId == user.id || contract.ClientId == user.id;
+    return contract.ContractorId === user.id || contract.ClientId === user.id;
   };
 
   return {
