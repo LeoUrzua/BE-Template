@@ -4,7 +4,8 @@ const adminVoter = () => {
   }
 
   const voteOnAttribute = async (attribute, subject, user, context) => {
-    return context.req.get('admin')
+    if(context.req.headers.admin == null) return false
+    return context.req.headers.admin
   };
 
   return {
